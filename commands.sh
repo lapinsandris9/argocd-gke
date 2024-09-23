@@ -17,7 +17,7 @@ helm list --pending -A
 helm list -A
 
 k get secrets argocd-initial-admin-secret -o yaml -n argocd
-echo "WmhnOFRpN0g3Q2NteThKTg==" | base64 -d
+echo "password-encoded" | base64 -d
 k port-forward svc/argocd-server -n argocd 8080:80
 # ON BROWSER
 http://localhost:8080/applications
@@ -27,3 +27,7 @@ docker pull nginx:1.23.3
 
 docker tag nginx:1.23.3 andrislapins/nginx:v0.1.0
 docker images
+
+# SIMULATE CI CD process - image version update
+docker tag nginx:1.23.3 andrislapins/nginx:v0.1.1
+docker push andrislapins/nginx:v0.1.1
